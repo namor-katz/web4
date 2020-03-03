@@ -1,6 +1,8 @@
 package DAO;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import model.Car;
 
 public class CarDao {
 
@@ -9,5 +11,6 @@ public class CarDao {
     public CarDao(Session session) {
         this.session = session;
     }
+
 
 }

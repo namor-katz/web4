@@ -3,7 +3,7 @@ package DAO;
 import model.DailyReport;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import java.util.LinkedList;
 import java.util.List;
 
 public class DailyReportDao {

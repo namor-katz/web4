@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Car {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id")//в указании имен полей НЕТ необходимости. они берутся из имен полей класса.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
