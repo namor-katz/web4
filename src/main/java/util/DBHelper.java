@@ -30,7 +30,7 @@ public class DBHelper {
     }
 
     public DBHelper() {
-        Configuration configuration = getH2Configuration();
+        Configuration configuration = getMySqlConfiguration();
         sessionFactory = createSessionFactory();
     }
 
@@ -56,9 +56,9 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/db_example");
         configuration.setProperty("hibernate.connection.username", "root");
-        configuration.setProperty("hibernate.connection.password", "root");
+        configuration.setProperty("hibernate.connection.password", "logrys7");
         configuration.setProperty("hibernate.show_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
+        configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
     }
 
@@ -77,8 +77,23 @@ public class DBHelper {
         return configuration;
     }
 
+    private static Configuration getSqliteConfiguration() {
+        Configuration configuration = new Configuration();
+        configuration.addAnnotatedClass(Car.class);
+        configuration.addAnnotatedClass(DailyReport.class)
+                .setProperty("hibernate.connection.driver_class", "org.sqlite.JDBC")
+                .setProperty("hibernate.connection.url", "jdbc:sqlite:test.sqlite")
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.SQLiteDialect")
+                .setProperty("hibernate.show_sql", hibernate_show_sql)
+                .setProperty("hibernate.hdm2ddl.auto", hibernate_hbm2ddl_auto);
+        //configuration.configure();
+        return configuration;
+
+
+    }
+
     private static SessionFactory createSessionFactory() {
-        Configuration configuration = getH2Configuration();
+        Configuration configuration = getMySqlConfiguration();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
