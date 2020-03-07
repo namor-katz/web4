@@ -19,6 +19,8 @@ import java.sql.SQLException;
 public class DBHelper {
     private static final String hibernate_show_sql = "true";
     private static final String hibernate_hbm2ddl_auto = "create";
+    private static final String hibernate_format_sql = "true";
+    private static final String hibernate_user_sql_comments = "true";
 
     private static SessionFactory sessionFactory;
 
@@ -59,6 +61,8 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.password", "logrys7");
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
+//        configuration.setProperty("hibernate.format_sql", hibernate_format_sql); //!!
+//        configuration.setProperty("hibernate.user_sql_comment", hibernate_user_sql_comments);
         return configuration;
     }
 

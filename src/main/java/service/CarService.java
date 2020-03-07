@@ -17,13 +17,9 @@ public class CarService {
 
     private static CarService carService;
 
-//    private SessionFactory sessionFactory;
-
     private CarDao carDao;
 
-
     private CarService() {
-//        this.sessionFactory = sessionFactory;
         carDao = new CarDao();
     }
 
@@ -36,28 +32,56 @@ public class CarService {
 
     public long addCar(String brand, String model, String licensePlate, long price) throws SQLException {
         long result;
-//        Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        CarDao dao = new CarDao(session);
+        //если больше 10 то не добавлять!
         Car car = new Car(brand, model,licensePlate, price);
         result = carDao.addCar(car);
-  //      transaction.commit();
-   //     session.close();
         return result;
+    }
+
+    public Car getCarById(Long id) {
+        Car car = carDao.getCarById(id);
+        return car;
+    }
+
+    public long ifCarExist(String brand, String model, String licensePlate) {
+        //может, получать id?
+        List ifCar = carDao.ifCarExist(brand, model, licensePlate);
+        if (ifCar.size() > 0) {
+            Car car = (Car)ifCar.get(0);
+            long index = car.getId();
+            return index;
+        }
+        else return 0;
+    }
+
+    public void deleteCar(long id) throws SQLException {
+        carDao.deleteCarById(id);
+    }
+
+    public boolean BuyCar(String brand, String model, String licensePlate) throws SQLException {
+        //вот тут я вижу, можно вообще ничего не возвращать. ибо оно просто проверяет потом getAllCars
+        long index;
+        index = ifCarExist(brand, model, licensePlate);
+        if(index == 0) {
+            return false;
+        }
+        else {
+            Car car = getCarById(index);
+            Long price = car.getPrice();
+            try {
+                DailyReportService dailyReportService = DailyReportService.getInstance();
+            dailyReportService.addValueInTable(price);
+            } catch (Exception e) {
+                System.out.println("сорян, не работает");
+            }
+            deleteCar(index);
+            return true;
+        }
     }
 
     public List<Car> getAllCars() {
         List allCarList = new LinkedList();
- //       Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        CarDao dao = new CarDao(ses);
         allCarList = carDao.getAllCars();
-
         return allCarList;
     }
-/*
-    private static CarDao getCarClientDAO() {
-        return new CarDao(getMysqlConnection());
-    }
-*/
 }
