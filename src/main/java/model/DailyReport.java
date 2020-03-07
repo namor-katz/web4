@@ -1,7 +1,5 @@
 package model;
 
-import org.hibernate.Session;
-
 import javax.persistence.*;
 
 @Entity

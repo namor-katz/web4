@@ -3,11 +3,8 @@ package DAO;
 import org.hibernate.*;
 import model.Car;
 import util.DBHelper;
-
 import java.awt.*;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CarDao {

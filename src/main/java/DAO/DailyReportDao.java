@@ -1,11 +1,9 @@
 package DAO;
 
 import model.DailyReport;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import util.DBHelper;
+import java.awt.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +16,7 @@ public class DailyReportDao {
         this.sessionFactory = DBHelper.getSessionFactory();
     }
 
-    public long addValueInTable(long price) {
+    public long addValueInTable(long price) throws HibernateException {
         long count = 1;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -73,6 +71,7 @@ public class DailyReportDao {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<DailyReport> dailyReports = session.createQuery("FROM DailyReport").list();
+        System.out.println("ЭТО дайлиРЕпортЛист" + dailyReports.size());
         transaction.commit();
         session.close();
         return dailyReports;
