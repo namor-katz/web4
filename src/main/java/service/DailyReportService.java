@@ -44,15 +44,7 @@ public class DailyReportService {
     }
 
     public void addValueInTable(long price) {
-//        long result;
-//        long TableContent = dailyReportDao.getCountSaleCars();
-//        if(TableContent == 0) { //если пуста вызываем эдд
-//            DailyReport dailyReport = new DailyReport(price, 1L);
             dailyReportDao.addValueInTable(price);
-//        }
-//        else {  //если нет Едит
-//            dailyReportDao.editValueTable(price);
-//        }
     }
 
     public void editValueTable(long price) {
