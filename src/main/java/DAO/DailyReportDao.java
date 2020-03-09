@@ -6,7 +6,6 @@ import org.hibernate.loader.plan.spi.QuerySpaceUidNotRegisteredException;
 import util.DBHelper;
 import java.awt.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class DailyReportDao {
@@ -21,13 +20,10 @@ public class DailyReportDao {
         long count = 1;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-//        String hql = "update DailyReport SET earnings = :count , soldCars = :newSum";
-//        String hql2 = "INSERT INTO DailyReport () SET";
         DailyReport dailyReport = new DailyReport(price, count);
         Long result = (long) session.save(dailyReport);
         transaction.commit();
         session.close();
-        System.out.println("я РЕЗУЛЬТ из дайлиРепортДАо, я равен = " + result);
         return result;
     }
 
@@ -36,9 +32,9 @@ public class DailyReportDao {
         before_count++;
         long before_money = getMoneySum();
         long after_sum = before_money + price;
-        System.out.println("АФТЕР сум = " + after_sum);
+//        System.out.println("АФТЕР сум = " + after_sum);
         String hql = "UPDATE DailyReport SET earnings = :earnings , soldCars = :soldCars";
-        Session session = sessionFactory.openSession();//!!!
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter("earnings", after_sum);
@@ -48,6 +44,15 @@ public class DailyReportDao {
         transaction.commit();
         session.close();
         return result;
+    }
+
+    public void StartNewDay() {
+        DailyReport dailyReport = new DailyReport(0L, 0L);
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(dailyReport);
+        transaction.commit();
+        session.close();
     }
 
     public int getCountRows() {
@@ -83,13 +88,15 @@ public class DailyReportDao {
         long result;
         String hql = "From DailyReport"; //!! неверный селект (был)
         Session session = sessionFactory.openSession();
-//        Query query = session.createQuery(hql).list().get(0).g
-
         DailyReport dailyReport = (DailyReport) session.createQuery(hql).list().get(0);
         result = dailyReport.getEarnings();
-        System.out.println("это результ из КарСервисе тут должен быть ЛОНГ " + result);
         session.close();
         return result;
+    }
+
+    public long getMaxIdDay() {
+       //tmp, возможно, нинужон
+        return 0;
     }
 
     public List<DailyReport> getAllDailyReport() {

@@ -17,7 +17,7 @@ public class NewDayServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Я неюДайСервлет!");
         DailyReportService drs = DailyReportService.getInstance();
-        DailyReport lastReport =  drs.getLastReport();
+        drs.StartNewDay();
         resp.setContentType("text/html; charset=utf-8");
         resp.setStatus(HttpServletResponse.SC_OK);
     }

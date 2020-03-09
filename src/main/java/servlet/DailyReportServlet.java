@@ -19,8 +19,8 @@ public class DailyReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getPathInfo().contains("all")) {
             DailyReportService.getInstance().getAllDailyReports();
-        } else if (req.getPathInfo().contains("last")) {
-//            DailyReport dailyReport = DailyReportService.getInstance().getLastReport();
+        }
+        else if (req.getPathInfo().contains("last")) {
             String json = new Gson().toJson(DailyReportService.getInstance().getLastReport());
             System.out.println(json + " я ЕСТЬ жейсон!");
 
@@ -34,6 +34,7 @@ public class DailyReportServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        super.doDelete(req, resp); //это всё же удаляет
+//        DailyReportService.getInstance().
     }
 }

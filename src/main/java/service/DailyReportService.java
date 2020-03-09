@@ -12,8 +12,6 @@ public class DailyReportService {
 
     private static DailyReportService dailyReportService;
 
-//    private SessionFactory sessionFactory;
-
     private DailyReportDao dailyReportDao;
 
     private DailyReportService() {
@@ -52,11 +50,16 @@ public class DailyReportService {
         dailyReportDao.editValueTable(price);
     }
 
+    public void StartNewDay() {
+        dailyReportDao.StartNewDay();
+    }
+
     public DailyReport getLastReport() {
         List<DailyReport> dailyReports;
         DailyReport dailyReport;
         dailyReports = dailyReportDao.getAllDailyReport();
-        dailyReport = dailyReports.get(0);
+        int MaxId = dailyReportDao.getCountRows() - 2;
+        dailyReport = dailyReports.get(MaxId);
         return dailyReport;
     }
 }
