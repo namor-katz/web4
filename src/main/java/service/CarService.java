@@ -68,9 +68,17 @@ public class CarService {
         else {
             Car car = getCarById(index);
             Long price = car.getPrice();
+            System.out.println("цена купленного авто = " + price);
+
             try {
                 DailyReportService dailyReportService = DailyReportService.getInstance();
-            dailyReportService.addValueInTable(price);
+                boolean isReportFirst = dailyReportService.itFirstSale();//если первая - вставляем первую строку.
+                if(isReportFirst == true) {
+                    dailyReportService.addValueInTable(price);//количество проданных тут константа.
+                }
+                else {
+                    dailyReportService.editValueTable(price);//обновляем сумму продаж и количество проданных
+                }
             } catch (Exception e) {
                 System.out.println("сорян, не работает");
             }

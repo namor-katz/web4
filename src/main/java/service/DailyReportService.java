@@ -35,11 +35,24 @@ public class DailyReportService {
         //количество_машин++ сумма_продаж = сумма_продаж + price
     }
 
+    public boolean itFirstSale() {
+        int result = dailyReportDao.getCountRows();
+        if (result > 0) {
+            return false; //не первая
+        }
+        else return true; //первая
+    }
+
     public void addValueInTable(long price) {
-        //добавляет после первой продажи, видимо, оно же и создаёт таблицу.
 //        long result;
-        DailyReport dailyReport = new DailyReport(1L, price);
-        dailyReportDao.addValueInTable(price);
+//        long TableContent = dailyReportDao.getCountSaleCars();
+//        if(TableContent == 0) { //если пуста вызываем эдд
+//            DailyReport dailyReport = new DailyReport(price, 1L);
+            dailyReportDao.addValueInTable(price);
+//        }
+//        else {  //если нет Едит
+//            dailyReportDao.editValueTable(price);
+//        }
     }
 
     public void editValueTable(long price) {
