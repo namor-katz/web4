@@ -46,6 +46,14 @@ public class DailyReportDao {
         return result;
     }
 
+    public void deleteAllData(String hql) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.createQuery(hql).executeUpdate();
+        tx.commit();
+        session.close();
+    }
+
     public void StartNewDay() {
         DailyReport dailyReport = new DailyReport(0L, 0L);
         Session session = sessionFactory.openSession();

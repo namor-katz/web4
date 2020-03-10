@@ -41,6 +41,10 @@ public class DailyReportService {
         else return true; //первая
     }
 
+    public void deleteAllData(String hqlFromDelete) {
+        dailyReportDao.deleteAllData(hqlFromDelete);
+    }
+
     public void addValueInTable(long price) {
             dailyReportDao.addValueInTable(price);
     }
