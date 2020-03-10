@@ -69,4 +69,14 @@ public class CarDao {
         return AllCars;
     }
 
+    public int getCountCarEqualBrand(String brand) {
+        List countRows; //empty, for check
+        String hql = "FROM Car WHERE brand = :brand";
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("brand", brand);
+        countRows = query.list();
+        int result = countRows.size();
+        return result;
+    }
 }

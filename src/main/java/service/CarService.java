@@ -31,11 +31,22 @@ public class CarService {
     }
 
     public long addCar(String brand, String model, String licensePlate, long price) throws SQLException {
+        //принять данные машины, если этого бренда менее 10, добавить, вернуть число. если 10 и более вернуть 0
         long result;
-        //если больше 10 то не добавлять!
-        Car car = new Car(brand, model,licensePlate, price);
-        result = carDao.addCar(car);
-        return result;
+        int CountCarsOneBrand = getCountCarEqualBrand(brand);
+        if(CountCarsOneBrand < 10) {
+            result = carDao.addCar(new Car(brand, model, licensePlate, price));
+            return result;
+        }
+        else {
+            System.out.println("машин этого бренда более 10. не добавляю.");
+            return 0L;
+        }
+    }
+
+    public int getCountCarEqualBrand(String brand) {
+        int countCar = carDao.getCountCarEqualBrand(brand);
+        return countCar;
     }
 
     public Car getCarById(Long id) {

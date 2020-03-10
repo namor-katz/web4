@@ -16,8 +16,6 @@ public class ProducerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //где то тут надо отдавать 403. если машина не принята
-        //вообще тут мы добавляем машины. в 1 тесте 10 штук.
         String brand = req.getParameter("brand");
         String licensePlate = req.getParameter("licensePlate");
         String model = req.getParameter("model");
@@ -25,8 +23,16 @@ public class ProducerServlet extends HttpServlet {
 
         CarService carService =  CarService.getInstance();
         try {
-            carService.addCar(brand, model, licensePlate, price);
-        } catch (SQLException e) {
+            long successAdd = carService.addCar(brand, model, licensePlate, price);
+            if(successAdd != 0) {
+                resp.setStatus(HttpServletResponse.SC_OK);
+            }
+            else {
+                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("в ПРОДУЦЕРсервлет произошло ебучее исключение!");
             e.printStackTrace();
         }
 
