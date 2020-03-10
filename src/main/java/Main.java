@@ -3,7 +3,6 @@ import model.DailyReport;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.h2.message.DbException;
 import service.CarService;
 import servlet.CustomerServlet;
 import servlet.DailyReportServlet;
@@ -22,7 +21,6 @@ public class Main {
         NewDayServlet newDayServlet = new NewDayServlet();
         DailyReportServlet dailyReportServlet = new DailyReportServlet();
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-
 
         context.addServlet(new ServletHolder(customerServlet), "/customer");
         context.addServlet(new ServletHolder(producerServlet), "/producer");

@@ -29,10 +29,6 @@ public class DailyReportService {
         return dailyReportDao.getAllDailyReport();
     }
 
-    public void addSoldData(long price) {
-        //количество_машин++ сумма_продаж = сумма_продаж + price
-    }
-
     public boolean itFirstSale() {
         int result = dailyReportDao.getCountRows();
         if (result > 0) {
@@ -64,6 +60,7 @@ public class DailyReportService {
         dailyReports = dailyReportDao.getAllDailyReport();
         int MaxId = dailyReportDao.getCountRows() - 2;
         dailyReport = dailyReports.get(MaxId);
+        System.out.println("ЯЯЯЯ дайлиРепорт " + dailyReport);
         return dailyReport;
     }
 }

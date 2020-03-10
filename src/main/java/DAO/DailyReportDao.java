@@ -94,7 +94,7 @@ public class DailyReportDao {
 
     public long getMoneySum() {
         long result;
-        String hql = "From DailyReport"; //!! неверный селект (был)
+        String hql = "From DailyReport";
         Session session = sessionFactory.openSession();
         DailyReport dailyReport = (DailyReport) session.createQuery(hql).list().get(0);
         result = dailyReport.getEarnings();
@@ -111,7 +111,7 @@ public class DailyReportDao {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<DailyReport> dailyReports = session.createQuery("FROM DailyReport").list();
-        System.out.println("ЭТО дайлиРЕпортЛист" + dailyReports.size());
+        System.out.println("ЭТО ДайлиРепортЛист, количество отчетов = " + dailyReports.size());
         transaction.commit();
         session.close();
         return dailyReports;

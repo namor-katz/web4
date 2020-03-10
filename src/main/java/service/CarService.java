@@ -3,7 +3,6 @@ package service;
 import DAO.CarDao;
 import model.Car;
 import model.DailyReport;
-//import org.h2.message.DbException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

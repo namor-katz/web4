@@ -42,14 +42,7 @@ public class CarDao {
         ifCar = query.list();
         return ifCar;
     }
-/*
-    public int buyCar(String brand, String model, String licensePlate) {
 
-        query.l
-
-
-    }
-*/
     public long addCar(Car car) throws HeadlessException {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();

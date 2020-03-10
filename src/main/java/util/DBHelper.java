@@ -60,7 +60,7 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/db_example");
         configuration.setProperty("hibernate.connection.username", "root");
         configuration.setProperty("hibernate.connection.password", "logrys7");
-        configuration.setProperty("hibernate.show_sql", "true");
+//        configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
 //        configuration.setProperty("hibernate.format_sql", hibernate_format_sql); //!!
 //        configuration.setProperty("hibernate.user_sql_comment", hibernate_user_sql_comments);
