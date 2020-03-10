@@ -28,7 +28,6 @@ public class DailyReportServlet extends HttpServlet {
         }
         else if (req.getPathInfo().contains("last")) {
             String json = new Gson().toJson(DailyReportService.getInstance().getLastReport());
-//            System.out.println(json + " я ЕСТЬ жейсон!");
 
             PrintWriter out = resp.getWriter();
             resp.setContentType("application/json");

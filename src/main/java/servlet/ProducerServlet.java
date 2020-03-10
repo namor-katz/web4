@@ -32,7 +32,6 @@ public class ProducerServlet extends HttpServlet {
             }
         }
         catch (SQLException e) {
-            System.out.println("в ПРОДУЦЕРсервлет произошло ебучее исключение!");
             e.printStackTrace();
         }
 

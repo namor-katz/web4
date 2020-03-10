@@ -60,7 +60,6 @@ public class DailyReportService {
         dailyReports = dailyReportDao.getAllDailyReport();
         int MaxId = dailyReportDao.getCountRows() - 2;
         dailyReport = dailyReports.get(MaxId);
-        System.out.println("ЯЯЯЯ дайлиРепорт " + dailyReport);
         return dailyReport;
     }
 }

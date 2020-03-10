@@ -54,7 +54,6 @@ public class CarService {
     }
 
     public long ifCarExist(String brand, String model, String licensePlate) {
-        //может, получать id?
         List ifCar = carDao.ifCarExist(brand, model, licensePlate);
         if (ifCar.size() > 0) {
             Car car = (Car)ifCar.get(0);
@@ -78,7 +77,6 @@ public class CarService {
         else {
             Car car = getCarById(index);
             Long price = car.getPrice();
-            System.out.println("цена купленного авто = " + price);
 
             try {
                 DailyReportService dailyReportService = DailyReportService.getInstance();
@@ -90,7 +88,7 @@ public class CarService {
                     dailyReportService.editValueTable(price);//обновляем сумму продаж и количество проданных
                 }
             } catch (Exception e) {
-                System.out.println("сорян, не работает");
+                System.out.println("неожиданное исключение.");
             }
             deleteCar(index);
             return true;

@@ -32,7 +32,6 @@ public class DailyReportDao {
         before_count++;
         long before_money = getMoneySum();
         long after_sum = before_money + price;
-//        System.out.println("АФТЕР сум = " + after_sum);
         String hql = "UPDATE DailyReport SET earnings = :earnings , soldCars = :soldCars";
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -102,16 +101,10 @@ public class DailyReportDao {
         return result;
     }
 
-    public long getMaxIdDay() {
-       //tmp, возможно, нинужон
-        return 0;
-    }
-
     public List<DailyReport> getAllDailyReport() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<DailyReport> dailyReports = session.createQuery("FROM DailyReport").list();
-        System.out.println("ЭТО ДайлиРепортЛист, количество отчетов = " + dailyReports.size());
         transaction.commit();
         session.close();
         return dailyReports;
